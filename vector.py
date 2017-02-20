@@ -1,40 +1,48 @@
 import math
 
+
 # http://www.fundza.com/vectors/point2line/index.html
-def dot(v,w):
-    x,y = v
-    X,Y = w
-    return x*X + y*Y
-  
+def dot(v, w):
+    x, y = v
+    X, Y = w
+    return x * X + y * Y
+
+
 def length(v):
-    x,y = v
-    return math.sqrt(x*x + y*y)
-  
-def vector(b,e):
-    x,y = b
-    X,Y = e
-    return (X-x, Y-y)
-  
+    x, y = v
+    return math.sqrt(x * x + y * y)
+
+
+def vector(b, e):
+    x, y = b
+    X, Y = e
+    return (X - x, Y - y)
+
+
 def unit(v):
-    x,y = v
+    x, y = v
     mag = length(v)
-    return (x/mag, y/mag)
-  
-def distance(p0,p1):
-    return length(vector(p0,p1))
-  
-def scale(v,sc):
-    x,y = v
+    return (x / mag, y / mag)
+
+
+def distance(p0, p1):
+    return length(vector(p0, p1))
+
+
+def scale(v, sc):
+    x, y = v
     return (x * sc, y * sc)
-  
-def add(v,w):
-    x,y = v
-    X,Y = w
-    return (x+X, y+Y)
+
+
+def add(v, w):
+    x, y = v
+    X, Y = w
+    return (x + X, y + Y)
+
 
 # Given a line with coordinates 'start' and 'end' and the
-# coordinates of a point 'pnt' the proc returns the shortest 
-# distance from pnt to the line and the coordinates of the 
+# coordinates of a point 'pnt' the proc returns the shortest
+# distance from pnt to the line and the coordinates of the
 # nearest point on the line.
 #
 # 1  Convert the line segment to a vector ('line_vec').
@@ -47,16 +55,16 @@ def add(v,w):
 # 8  Use t to get the nearest location on the line to the end
 #    of vector pnt_vec_scaled ('nearest').
 # 9  Calculate the distance from nearest to pnt_vec_scaled.
-# 10 Translate nearest back to the start/end line. 
+# 10 Translate nearest back to the start/end line.
 # Malcolm Kesson 16 Dec 2012
-  
+
 def pnt2line(pnt, start, end):
     line_vec = vector(start, end)
     pnt_vec = vector(start, pnt)
     line_len = length(line_vec)
     line_unitvec = unit(line_vec)
-    pnt_vec_scaled = scale(pnt_vec, 1.0/line_len)
-    t = dot(line_unitvec, pnt_vec_scaled)    
+    pnt_vec_scaled = scale(pnt_vec, 1.0 / line_len)
+    t = dot(line_unitvec, pnt_vec_scaled)
     r = 1
     if t < 0.0:
         t = 0.0
@@ -68,14 +76,15 @@ def pnt2line(pnt, start, end):
     dist = distance(nearest, pnt_vec)
     nearest = add(nearest, start)
     return (dist, (int(nearest[0]), int(nearest[1])), r)
+
 
 def pnt2line2(pnt, start, end):
     line_vec = vector(start, end)
     pnt_vec = vector(start, pnt)
     line_len = length(line_vec)
     line_unitvec = unit(line_vec)
-    pnt_vec_scaled = scale(pnt_vec, 1.0/line_len)
-    t = dot(line_unitvec, pnt_vec_scaled)    
+    pnt_vec_scaled = scale(pnt_vec, 1.0 / line_len)
+    t = dot(line_unitvec, pnt_vec_scaled)
     r = 1
     if t < 0.0:
         t = 0.0
@@ -87,4 +96,3 @@ def pnt2line2(pnt, start, end):
     dist = distance(nearest, pnt_vec)
     nearest = add(nearest, start)
     return (dist, (int(nearest[0]), int(nearest[1])), r)
-

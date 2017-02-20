@@ -1,10 +1,2 @@
-
-.ipynb_checkpoints
-
-videos/lvl2/*
-videos/lvl3/*
-
-output/train_data/*
-output/train_sample/*
-
-output/predictions/*
+lvl2/
+lvl3/
